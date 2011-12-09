@@ -14,6 +14,7 @@ int main(int argc, char *argv[]) {
   NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 
   if(argc < 3) {
+    fprintf(stderr, "usage: %s srcfile dstfile [{width}x{height}] [png|tiff|bmp|gif|jpg]\n", argv[0]);
     return -1;
   }
   NSString *srcfile = [[NSString stringWithUTF8String: argv[1]] stringByExpandingTildeInPath];
@@ -54,9 +55,7 @@ int main(int argc, char *argv[]) {
   } else if([format caseInsensitiveCompare:@"jpg"] == 0){
       data = [rep representationUsingType: NSJPEGFileType properties: nil];
   } else {
-    printf("unknown format: ");
-    printf([format UTF8String]);
-    printf("\n");
+    fprintf(stderr, "unknown format: %s\n", [format UTF8String]);
     return -1;
   }
   [data writeToFile: dstfile atomically: NO];
