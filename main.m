@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
   if(argc >= 4) {
     NSArray *sizes = [[NSString stringWithUTF8String: argv[3]] componentsSeparatedByString:@"x"];
     int maxwidth   = [[sizes objectAtIndex: 0] intValue];
-    int maxheight  = [[sizes objectAtIndex: 1] intValue];        
+    int maxheight  = [[sizes objectAtIndex: 1] intValue];
     dstsize = NSMakeSize(maxwidth, maxheight);
   } else {
     dstsize = NSMakeSize(200,200);
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
 
   NSData *data;
   if([format caseInsensitiveCompare:@"png"] == 0) {
-      data =  [rep representationUsingType: NSPNGFileType properties: nil];
+      data = [rep representationUsingType: NSPNGFileType properties: nil];
   } else if([format caseInsensitiveCompare:@"tiff"] == 0) {
       data = [rep representationUsingType: NSTIFFFileType properties: nil];
   } else if([format caseInsensitiveCompare:@"bmp"] == 0) {
@@ -62,5 +62,5 @@ int main(int argc, char *argv[]) {
   [data writeToFile: dstfile atomically: NO];
 
   [pool release];
-  return 0;	
+  return 0;
 }

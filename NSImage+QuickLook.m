@@ -17,14 +17,14 @@
     if (!path || !fileURL) {
         return nil;
     }
-    
-    NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:icon] 
+
+    NSDictionary *dict = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:icon]
                                                      forKey:(NSString *)kQLThumbnailOptionIconModeKey];
-    CGImageRef ref = QLThumbnailImageCreate(kCFAllocatorDefault, 
-                                            (CFURLRef)fileURL, 
+    CGImageRef ref = QLThumbnailImageCreate(kCFAllocatorDefault,
+                                            (CFURLRef)fileURL,
                                             CGSizeMake(size.width, size.height),
                                             (CFDictionaryRef)dict);
-    
+
     if (ref != NULL) {
         // Take advantage of NSBitmapImageRep's -initWithCGImage: initializer, new in Leopard,
         // which is a lot more efficient than copying pixel data into a brand new NSImage.
@@ -35,7 +35,7 @@
             newImage = [[NSImage alloc] initWithSize:[bitmapImageRep size]];
             [newImage addRepresentation:bitmapImageRep];
             [bitmapImageRep release];
-            
+
             if (newImage) {
                 return [newImage autorelease];
             }
@@ -49,7 +49,7 @@
         }
         return icon;
     }
-    
+
     return nil;
 }
 
